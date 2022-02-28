@@ -1,24 +1,26 @@
-const loadUsers = () => {
-  fetch(`https://randomuser.me/api/?results=5`)
+const loadPlayer = () => {
+  const searchValue = document.getElementById("inputSearch").value;
+  const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${searchValue}`;
+  fetch(url)
     .then((res) => res.json())
-    .then((data) => showOser(data.results));
-
-  document.getElementById("spinner-area").style.display = "flex";
+    .then((data) => showPlayer(data.player));
 };
-const showOser = (users) => {
-  const divContainer = document.getElementById("user-container");
-  for (const user of users) {
-    console.log(user);
-
-    const divCol = document.createElement("div");
-    divCol.classList.add("col-3", "mt-5");
-    divCol.innerHTML = `
-    <h2>Name: ${user.name.first}</h2>
-    <p>Gender: ${user.gender}</p>
-    <p>Email: ${user.email}</p>
-    <img src="${user.picture.large}" class="img-fluid" alt="image" />
+const showPlayer = (players) => {
+  const searchWrapper = document.getElementById("result-wrapper");
+  for (const player of players) {
+    const cardDiv = document.createElement("div");
+    cardDiv.classList.add("card", "col-md-6");
+    cardDiv.innerHTML = `
+      <img src="${player.strThumb}" class="card-img-top" alt="Image" />
+      <div class="card-body">
+        <h5 class="card-title">Name: ${player.strPlayer}</h5>
+        <p class="lead">Birth Place: ${player.strBirthLocation}<p>
+        <p class="card-text">${player.strDescriptionEN.slice(0, 40)}</p>
+        <a href="#" class="btn btn-primary">Delete</a>
+        <a href="#" class="btn btn-primary">Details</a>
+      </div>
     `;
-    divContainer.appendChild(divCol);
-    document.getElementById("spinner-area").style.display = "none";
+    searchWrapper.appendChild(cardDiv);
+    console.log(player);
   }
 };

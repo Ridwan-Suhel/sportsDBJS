@@ -27,6 +27,7 @@
 
             <div class="input-group my-3">
               <input
+                id="inputSearch"
                 type="text"
                 class="form-control"
                 placeholder="Search Player Name"
@@ -37,18 +38,14 @@
                 class="btn btn-outline-secondary"
                 type="button"
                 id="button-addon2"
+                onclick="loadPlayer()"
               >
                 Search
               </button>
             </div>
             <!-- search-result -->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="">
-                  <img src="" alt="" />
-                  <p>Lorem ipsum dolor sit amet.</p>
-                </div>
-              </div>
+            <div class="row" id="result-wrapper">
+              <!-- <div class="card" style="width: 18rem"></div> -->
             </div>
           </div>
           <!-- player details -->
